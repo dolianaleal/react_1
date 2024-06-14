@@ -1,15 +1,11 @@
-import { Counter } from "./components/counter/Counter";
-import Footer from "./components/footer/Footer";
 import { Navbar } from "./components/navbar/Navbar";
-import { Home } from "./pag/home/Home";
+import ItemListContainer from "./pag/itemListContainer/ItemListContainer";
 
 function App() {
   return (
     <div>
       <Navbar />
-      <Home />
-      <Counter />
-      <Footer /> {/* Footer() */}
+      <ItemListContainer greeting={"Test"} />
     </div>
   );
 }

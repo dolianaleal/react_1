@@ -1,3 +1,6 @@
 .navbarContainer {
-  background-color: peru;
+  background-color: rgb(63, 205, 198);
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
