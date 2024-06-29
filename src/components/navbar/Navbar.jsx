@@ -1,5 +1,5 @@
+import CartWidget from "../cartWidget/CartWidget";
 import "./navbar.css";
-import { FaShoppingCart } from "react-icons/fa";
 
 export const Navbar = () => {
   return (
@@ -8,11 +8,11 @@ export const Navbar = () => {
 
       <ul style={{ display: "flex", gap: "20px" }}>
         <li style={{ listStyle: "none" }}>All</li>
-        <li style={{ listStyle: "none" }}>Urb</li>
-        <li style={{ listStyle: "none" }}>Dep</li>
+        <li style={{ listStyle: "none" }}>Merch</li>
+        <li style={{ listStyle: "none" }}>Cont</li>
       </ul>
 
-      <FaShoppingCart />
+      <CartWidget />
     </div>
   );
 };
