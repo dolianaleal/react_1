@@ -3,7 +3,7 @@ import { useState } from "react";
 export const Counter = () => {
   // estado es como una variable pero que recuerda su valor anterior
 
-  const [contador, setContador] = useState(0); // [undefined, function]
+  const [contador, setContador] = useState(1); // [undefined, function]
 
   console.log(contador);
   //let contador = 0;
