@@ -4,6 +4,16 @@ import "./navbar.css";
 export const Navbar = () => {
   return (
     <div className="navbarContainer">
+      <img
+        src="https://res.cloudinary.com/digkbsljg/image/upload/v1719784833/img1_yh1pqe.webp"
+        alt=""
+        style={{
+          width: "100px",
+          height: "100px",
+          objectFit: "cover",
+        }}
+      />
+
       <h1>EC</h1>
 
       <ul style={{ display: "flex", gap: "20px" }}>
