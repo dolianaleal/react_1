@@ -1,14 +1,26 @@
-import { useState } from "react";
+import { Button } from "@mui/material";
 
-export const Counter = ({ restar, contador, sumar }) => {
-  // estado es como una variable pero que recuerda su valor anterior
-
+export const Counter = ({ restar, contador, sumar, onAdd }) => {
   return (
-    <div>
-      <button onClick={restar}>Restar</button>
-      <h2>{contador}</h2>
-      <button onClick={sumar}>Sumar</button>
-      <ProductCard title="una" descripcion="test" price={contador} />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "1rem",
+      }}
+    >
+      <Button variant="contained" onClick={restar}>
+        Restar
+      </Button>
+      <h2> {contador} </h2>
+      <Button variant="contained" onClick={sumar}>
+        Sumar
+      </Button>
+
+      <Button variant="outlined" onClick={() => onAdd(contador)}>
+        Agregar al carrito
+      </Button>
     </div>
   );
 };

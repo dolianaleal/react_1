@@ -1,27 +1,28 @@
-import { useState } from "react";
-import { Navbar } from "./components/navbar/Navbar";
-import ItemListContainer from "./pag/itemListContainer/ItemListContainer";
-import LoginContainer from "./pag/login/LoginContainer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ItemListContainer from "./pages/itemListContainer/ItemListContainer";
+import Cart from "./pages/cart/Cart";
+import ItemDetailContainer from "./pages/itemDetailContainer/ItemDetailContainer";
+import Layout from "./components/layout/Layout";
+import Checkout from "./pages/checkout/Checkout";
+import CartContextProvider from "./context/CartContext";
 
 function App() {
-  const [estaMontado, setEstaMontado] = useState(false);
-
-  const montarDesmontar = () => {
-    setEstaMontado(!estaMontado);
-  };
-
-  console.log(estaMontado);
-
   return (
-    <>
-      <Navbar />
+    <BrowserRouter>
+      <CartContextProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<ItemListContainer />} />
+            <Route path="/category/:name" element={<ItemListContainer />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/itemDetail/:id" element={<ItemDetailContainer />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Route>
 
-      <LoginContainer />
-
-      {estaMontado ? <ItemListContainer greeting={"Test"} /> : null}
-
-      <button onClick={montarDesmontar}>montar / desmontar</button>
-    </>
+          <Route path="*" element={<h1> 404 Not found</h1>} />
+        </Routes>
+      </CartContextProvider>
+    </BrowserRouter>
   );
 }
 
