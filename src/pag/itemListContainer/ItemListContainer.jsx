@@ -1,52 +1,37 @@
-import { useState, useEffect } from "react";
 import ItemList from "./ItemList";
+import { products } from "../../products";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const ItemListContainer = ({ greeting, a, b, c, d }) => {
-  const [numero, setNumero] = useState(1);
-  const [misProductos, setMisProductos] = useState([]);
-  const [nombre, setNombre] = useState("UserTest");
+const ItemListContainer = () => {
+  // una peticion que me traiga los productos del backend
+
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState({});
+  const { name } = useParams();
 
   useEffect(() => {
-    console.log("me ejecute");
-    const productos = [
-      {
-        name: "Laptop",
-        price: 1200,
-        category: "Electronics",
-      },
-      {
-        name: "Coffee Maker",
-        price: 80,
-        category: "Home Appliances",
-      },
-      {
-        name: "Running Shoes",
-        price: 100,
-        category: "Footwear",
-      },
-    ];
+    const getProducts = new Promise((resolve, reject) => {
+      let x = true;
+      let arrayFiltered = products.filter(products.category === name);
+      if (x) {
+        resolve(name ? arrayFiltered : products);
+      } else {
+        reject({ message: "error", codigo: "404" });
+      }
+    });
 
-    setMisProductos(productos);
-  }, [nombre]); //array de dependencias
+    // manejar la promesa
+    getProducts
+      .then((res) => {
+        setItems(res);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, [name]);
 
-  console.log(misProductos);
-
-  const sumar = () => {
-    setNumero(numero + 1);
-  };
-
-  const cambiarNombre = () => {
-    setNombre("UsetTest02");
-  };
-
-  return (
-    <ItemList
-      greeting={greeting}
-      sumar={sumar}
-      cambiarNombre={cambiarNombre}
-      numero={numero}
-    />
-  );
+  return <ItemList items={items} />;
 };
 
 export default ItemListContainer;

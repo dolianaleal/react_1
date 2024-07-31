@@ -1,10 +1,29 @@
-const ItemList = ({ greeting, numero, sumar, cambiarNombre }) => {
+import { ProductCard } from "../../components/productCard/ProductCard";
+
+const ItemList = ({ items }) => {
+  console.log(items);
   return (
-    <div>
-      <h1>{greeting}</h1>
-      <h1>{numero}</h1>
-      <button onClick={sumar}>sumar</button>
-      <button onClick={cambiarNombre}>Cambiar nombre</button>
+    <div
+      style={{
+        display: "flex",
+        gap: "20px",
+        marginTop: "20px",
+        flexWrap: "wrap",
+        justifyContent: "space-evenly",
+      }}
+    >
+      {items.map((elemento) => {
+        return (
+          <ProductCard
+            key={elemento.id}
+            title={elemento.title}
+            description={elemento.description}
+            price={elemento.price}
+            id={elemento.id}
+            img={elemento.img}
+          />
+        );
+      })}
     </div>
   );
 };

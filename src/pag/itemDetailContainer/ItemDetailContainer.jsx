@@ -4,7 +4,7 @@ import { products } from "../../products";
 import { useParams } from "react-router-dom";
 
 const ItemDetailContainer = () => {
-  const { id } = useParams();
+  const { id } = useParams(); //id dinamico
 
   const [item, setItem] = useState({});
 
