@@ -32,7 +32,7 @@ export const ProductCard = ({ title, description, price, id, img }) => {
       <CardActions>
         <Link to={"`/itemDetail/${id}`"}>
           <Button size="small" variant="outlined">
-            +
+            Ver mas
           </Button>
         </Link>
       </CardActions>
