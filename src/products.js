@@ -14,6 +14,7 @@ export let products = [
                   stock: 20,
                   description: "Noise-cancelling over-ear headphones.",
                   category: "Electronics",
+                  stock: 12,
                   img: "https://res.cloudinary.com/digkbsljg/image/upload/v1720158410/2024-07-05_024605_sotu7h.png"
          },
          {

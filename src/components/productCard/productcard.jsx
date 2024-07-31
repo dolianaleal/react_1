@@ -31,7 +31,7 @@ export const ProductCard = ({ title, description, price, id, img }) => {
       </CardContent>
       <CardActions>
         <Link to={"`/itemDetail/${id}`"}>
-          <Button size="small" variant="contained">
+          <Button size="small" variant="outlined">
             +
           </Button>
         </Link>
