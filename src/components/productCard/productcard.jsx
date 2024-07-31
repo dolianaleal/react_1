@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export const ProductCard = ({ title, description, price, id, image }) => {
+export const ProductCard = ({ title, description, price, id, img }) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia

@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 
 const ItemListContainer = () => {
   // una peticion que me traiga los productos del backend
-
   const [items, setItems] = useState([]);
   const [error, setError] = useState({});
   const { name } = useParams();
@@ -13,7 +12,9 @@ const ItemListContainer = () => {
   useEffect(() => {
     const getProducts = new Promise((resolve, reject) => {
       let x = true;
-      let arrayFiltered = products.filter(products.category === name);
+      let arrayFiltered = products.filter(
+        (product) => products.category === name
+      );
       if (x) {
         resolve(name ? arrayFiltered : products);
       } else {
