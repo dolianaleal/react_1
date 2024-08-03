@@ -15,7 +15,15 @@ const ItemDetailContainer = () => {
     }
   }, [id]);
 
-  return <ItemDetail item={item} />;
+  //inf del producto
+  //unidades en stock
+  console.log(item);
+
+  const onAdd = (quantity) => {
+    console.log(quantity);
+  };
+
+  return <ItemDetail item={item} onAdd={onAdd} />;
 };
 
 export default ItemDetailContainer;
