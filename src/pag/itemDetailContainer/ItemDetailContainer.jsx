@@ -15,12 +15,14 @@ const ItemDetailContainer = () => {
     }
   }, [id]);
 
-  //inf del producto
-  //unidades en stock
   console.log(item);
 
   const onAdd = (quantity) => {
-    console.log(quantity);
+    //inf del producto
+    //unidades en stock
+
+    let objetoFinal = { ...item, quantity: quantity };
+    console.log(objetoFinal);
   };
 
   return <ItemDetail item={item} onAdd={onAdd} />;
