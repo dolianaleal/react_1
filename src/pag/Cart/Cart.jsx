@@ -8,7 +8,17 @@ const Cart = () => {
 
   return (
     <div>
-      <h1>Aca va el carrito</h1>
+      {cart.map((elemento) => {
+        return (
+          <div
+            key={elemento.id}
+            style={{ border: "2px solid black", width: "200px" }}
+          >
+            <h2>{elemento.title}</h2>
+            <h2>{elemento.quantity}</h2>
+          </div>
+        );
+      })}
 
       <Button onClick={clearCart}> Limpiar Carrito </Button>
       <Link to="/checkout">
