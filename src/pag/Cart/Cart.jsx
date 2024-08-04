@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 
 const Cart = () => {
-  const { cart, clearCart } = useContext(CartContext);
+  const { cart, clearCart, deleteProduct } = useContext(CartContext);
 
   return (
     <div>
@@ -16,13 +16,19 @@ const Cart = () => {
           >
             <h2>{elemento.title}</h2>
             <h2>{elemento.quantity}</h2>
+            <Button
+              variant="contained"
+              onClick={() => deleteProduct(elemento.id)}
+            >
+              Eliminar
+            </Button>
           </div>
         );
       })}
 
       <Button onClick={clearCart}> Limpiar Carrito </Button>
       <Link to="/checkout">
-        <Button variant="contained">Finalizar compra </Button>
+        <Button variant="contained">Finalizar compra</Button>
       </Link>
     </div>
   );
