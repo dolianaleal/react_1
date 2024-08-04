@@ -22,7 +22,7 @@ const ItemDetail = ({ item, onAdd }) => {
             </h2>
           </div>
         </div>
-        <CounterContainer onAdd={onAdd} />
+        <CounterContainer onAdd={onAdd} stock={item.stock} />
       </div>
     </>
   );
