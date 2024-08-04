@@ -5,11 +5,13 @@ import { useParams } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 
 const ItemDetailContainer = () => {
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, getQuantityById } = useContext(CartContext); //missing gqbi
 
   const { id } = useParams(); //id dinamico
 
   const [item, setItem] = useState({});
+
+  let initial = getQuantityById(+id);
 
   useEffect(() => {
     let product = products.find((product) => product.id === +id);
@@ -26,7 +28,7 @@ const ItemDetailContainer = () => {
     addToCart(objetoFinal);
   };
 
-  return <ItemDetail item={item} onAdd={onAdd} />;
+  return <ItemDetail item={item} onAdd={onAdd} initial={initial} />;
 };
 
 export default ItemDetailContainer;

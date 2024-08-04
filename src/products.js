@@ -11,7 +11,7 @@ export let products = [
                   id: 2,
                   title: "Headphones",
                   price: 150,
-                  stock: 20,
+                  stock: 3,
                   description: "Noise-cancelling over-ear headphones.",
                   category: "Electronics",
                   stock: 12,

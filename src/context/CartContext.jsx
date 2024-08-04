@@ -37,13 +37,33 @@ const CartContextProvider = ({ children }) => {
 
   const deleteProduct = (id) => {
     //encontrar el prod, verificar, eliminar
+    console.log(id);
     //remindeeeeeeeeeeeeeer >>>> react: para eliminar un array, siempre utilizar el metodo FILTER
     //el metodo filter, devuelve un array, verifica que
     let newArr = cart.filter((elemento) => elemento.id !== id); // retornar un booleano [{}]
     setCart(newArr);
   };
 
-  let data = { cart, addToCart, clearCart, deleteProduct }; //las funciones deben pasar por el value
+  const getQuantityById = (id) => {
+    let productoEncontrado = cart.find((product) => product.id === id);
+    return productoEncontrado?.quantity;
+  };
+
+  const getTotalPrice = () => {
+    let total = cart.reduce((acc, elemento) => {
+      return acc + elemento.price * elemento.quantity;
+    }, 0);
+    return total;
+  };
+
+  let data = {
+    cart,
+    addToCart,
+    clearCart,
+    deleteProduct,
+    getQuantityById,
+    getTotalPrice,
+  }; //las funciones deben pasar por el value
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
 };
