@@ -1,9 +1,5 @@
-import { useState } from "react";
-
 //un estado para manejar inputs
 const Checkout = () => {
-  const [user, setUser] = useState({ nombre: "", email: "", telefono: "" });
-
   {
     /* const [obj, setObj] = useState(""); */
   }

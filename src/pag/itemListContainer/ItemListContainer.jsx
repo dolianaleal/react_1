@@ -2,6 +2,7 @@ import ItemList from "./ItemList";
 import { products } from "../../products";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { PacmanLoader } from "react-spinners";
 
 const ItemListContainer = () => {
   // una peticion que me traiga los productos del backend
@@ -16,7 +17,9 @@ const ItemListContainer = () => {
         (product) => products.category === name
       );
       if (x) {
-        resolve(name ? arrayFiltered : products);
+        setTimeout(() => {
+          resolve(name ? arrayFiltered : products);
+        }, 1000);
       } else {
         reject({ message: "error", codigo: "404" });
       }
@@ -31,6 +34,10 @@ const ItemListContainer = () => {
         setError(error);
       });
   }, [name]);
+
+  if (items.length === 0) {
+    return <PacmanLoader />; //revisar siempre que props recibe una lib -------revisar skeleton
+  }
 
   return <ItemList items={items} />;
 };
