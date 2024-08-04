@@ -1,3 +1,5 @@
+import { Button } from "@mui/material";
+
 export const Counter = ({ restar, contador, sumar, onAdd }) => {
   return (
     <div
