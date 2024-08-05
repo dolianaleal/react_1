@@ -13,13 +13,18 @@ const CheckoutFormik = () => {
       nombre: Yup.string()
         .required("este campo es obligatorio")
         .min(5, "minimo 5"),
-      email: Yup.string().email().required("este campo es obligatorio"),
+      email: Yup.string()
+        .email("debe tener @")
+        .required("este campo es obligatorio"),
       password: Yup.string()
         .required("este campo es obligatorio")
-        .matches(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])/),
+        .matches(
+          /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])/,
+          "debe incluir al menos 1 caracter de cada 1"
+        ),
       confirmar: Yup.string()
         .required("este campo es obligatorio")
-        .oneOf([Yup.ref("password")]),
+        .oneOf([Yup.ref("password")], "las passwords no coinciden"),
     }),
 
     validateOnChange: false,
