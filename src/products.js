@@ -4,6 +4,7 @@ export let products = [
                   title: "Laptop",
                   price: 1200,
                   stock: 5,
+                  category: "Electronics",
                   description: "High perform",
                   img: " https://res.cloudinary.com/digkbsljg/image/upload/v1720158334/2024-07-05_024429_nwjy5r.png"
          },
@@ -41,7 +42,7 @@ export let products = [
                   price: 60,
                   stock: 30,
                   description: "Fast-boiling electric kettle with auto shut-off.",
-                  category: "Appliances",
+                  category: "Furniture",
                   img: "https://res.cloudinary.com/digkbsljg/image/upload/v1720158765/5_f7q8m4.png"
          },
          {

@@ -3,36 +3,29 @@ import { products } from "../../products";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
+import { db } from "../../firebaseConfig";
+import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 
 const ItemListContainer = () => {
-  // una peticion que me traiga los productos del backend
-  const [items, setItems] = useState([]);
-  const [error, setError] = useState({});
   const { name } = useParams();
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    const getProducts = new Promise((resolve, reject) => {
-      let x = true;
-      let arrayFiltered = products.filter(
-        (product) => products.category === name
-      );
-      if (x) {
-        setTimeout(() => {
-          resolve(name ? arrayFiltered : products);
-        }, 1000);
-      } else {
-        reject({ message: "error", codigo: "404" });
-      }
-    });
+    let productsCollection = collection(db, "products");
 
-    // manejar la promesa
-    getProducts
-      .then((res) => {
-        setItems(res);
-      })
-      .catch((error) => {
-        setError(error);
+    let consulta = productsCollection;
+    if (name) {
+      consulta = query(productsCollection, where("category", "==", name));
+    } //prop filtrar, condicion, a donde apunta
+
+    let getProducts = getDocs(consulta);
+    getProducts.then((res) => {
+      //console.log({...res.docs[0].data(), id: res.docs[0].id})
+      let arrayValido = res.docs.map((product) => {
+        return { ...product.data(), id: product.id };
       });
+      setItems(arrayValido);
+    });
   }, [name]);
 
   if (items.length === 0) {
