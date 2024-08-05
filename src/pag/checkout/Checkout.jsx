@@ -2,9 +2,11 @@ import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
+import { useNavigate } from "react-router-dom";
 //un estado para manejar inputs
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({ nombre: "", email: "", telefono: "" });
   const { cart, getTotalPrice, clearCart } = useContext(CartContext);
   const [orderId, setOrderId] = useState(""); //truthy & falsy
@@ -20,16 +22,18 @@ const Checkout = () => {
     };
 
     let ordersCollection = collection(db, "orders");
-    addDoc(ordersCollection, order).then((res) => setOrderId(res.id));
-    // act prods
     let productCollection = collection(db, "products");
-
     cart.forEach((elemento) => {
       let refDoc = doc(productCollection, elemento.id);
       updateDoc(refDoc, { stock: elemento.stock - elemento.quantity });
     });
-
-    clearCart();
+    addDoc(ordersCollection, order)
+      .then((res) => setOrderId(res.id))
+      .catch()
+      .finally(() => {
+        clearCart();
+        navigate("/");
+      });
   };
 
   const capturarData = (event) => {

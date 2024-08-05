@@ -7,10 +7,12 @@ import Layout from "./components/layout/Layout";
 import Checkout from "./pag/checkout/Checkout";
 import CartContextProvider from "./context/CartContext";
 import CheckoutFormik from "./pag/checkoutFormik/CheckoutFormik";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <BrowserRouter>
+      <Toaster richColors position="bottom-right" />
       <CartContextProvider>
         <Routes>
           <Route element={<Layout />}>
