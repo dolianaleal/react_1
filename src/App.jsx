@@ -12,7 +12,7 @@ import { Toaster } from "sonner";
 function App() {
   return (
     <BrowserRouter>
-      <Toaster richColors position="bottom-right" />
+      <Toaster richColors position="bottom-right" duration={4000} />
       <CartContextProvider>
         <Routes>
           <Route element={<Layout />}>

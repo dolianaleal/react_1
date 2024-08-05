@@ -3,6 +3,7 @@ import { CartContext } from "../../context/CartContext";
 import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 //un estado para manejar inputs
 
 const Checkout = () => {
@@ -28,10 +29,14 @@ const Checkout = () => {
       updateDoc(refDoc, { stock: elemento.stock - elemento.quantity });
     });
     addDoc(ordersCollection, order)
-      .then((res) => setOrderId(res.id))
+      .then((res) => {
+        setOrderId(res.id);
+        toast.success(`Gracias por tu compra, tu ticket es ${res.id}`);
+      })
       .catch()
       .finally(() => {
         clearCart();
+
         navigate("/");
       });
   };

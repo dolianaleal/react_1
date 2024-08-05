@@ -8,8 +8,16 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { db } from "../../firebaseConfig";
+import { collection, deleteDoc, doc } from "firebase/firestore";
 
 export const ProductCard = ({ title, description, price, id, img }) => {
+  const eliminar = () => {
+    let productColl = collection(db, "products");
+    let refDoc = doc(productColl, id);
+    deleteDoc(refDoc);
+  };
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -31,10 +39,13 @@ export const ProductCard = ({ title, description, price, id, img }) => {
       </CardContent>
       <CardActions>
         <Link to={`/itemDetail/${id}`}>
-          <Button size="small" variant="outlined">
+          <Button size="small" variant="outlined" onClick={eliminar}>
             Ver mas
           </Button>
         </Link>
+        <Button size="small" variant="outlined">
+          Ver mas
+        </Button>
       </CardActions>
     </Card>
   );
