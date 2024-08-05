@@ -6,7 +6,7 @@ import { db } from "../../firebaseConfig";
 
 const Checkout = () => {
   const [user, setUser] = useState({ nombre: "", email: "", telefono: "" });
-  const { cart, getTotalPrice } = useContext(CartContext);
+  const { cart, getTotalPrice, clearCart } = useContext(CartContext);
   const [orderId, setOrderId] = useState(""); //truthy & falsy
 
   let total = getTotalPrice();
@@ -28,6 +28,8 @@ const Checkout = () => {
       let refDoc = doc(productCollection, elemento.id);
       updateDoc(refDoc, { stock: elemento.stock - elemento.quantity });
     });
+
+    clearCart();
   };
 
   const capturarData = (event) => {

@@ -30,7 +30,7 @@ export let products = [
 
                   title: "Smartphone",
                   price: 800,
-                  stock: 15,
+                  stock: 4,
                   description: "Latest model smartphone with advanced features.",
                   category: "Electronics",
                   img: "https://res.cloudinary.com/digkbsljg/image/upload/v1720158628/2024-07-05_025011_kvhhk0.png"
