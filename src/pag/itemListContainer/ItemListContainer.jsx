@@ -1,10 +1,17 @@
 import ItemList from "./ItemList";
-import { products } from "../../products";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
 import { db } from "../../firebaseConfig";
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDoc,
+  getDocs,
+  query,
+  where,
+  addDoc,
+} from "firebase/firestore";
+import { Button } from "@mui/material";
 
 const ItemListContainer = () => {
   const { name } = useParams();
@@ -32,7 +39,19 @@ const ItemListContainer = () => {
     return <PacmanLoader />; //revisar siempre que props recibe una lib -------revisar skeleton
   }
 
-  return <ItemList items={items} />;
+  //const addProducts = () => {
+  // let productsCollection = collection(db, "products");
+  //  products.forEach((elemento) => {
+  //addDoc(productsCollection, elemento);
+  // });
+  // };
+
+  return (
+    <div>
+      {/*  <Button onClick={addProducts}>Agregar productos</Button>*/}
+      <ItemList items={items} />;
+    </div>
+  );
 };
 
 export default ItemListContainer;

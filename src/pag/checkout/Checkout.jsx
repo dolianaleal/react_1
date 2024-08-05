@@ -1,100 +1,69 @@
+import { useContext, useState } from "react";
+import { CartContext } from "../../context/CartContext";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
 //un estado para manejar inputs
-const Checkout = () => {
-  {
-    /* const [obj, setObj] = useState(""); */
-  }
 
-  const [arrayCheckbox, setArrayCheckbox] = useState([]);
-  console.log(arrayCheckbox);
+const Checkout = () => {
+  const [user, setUser] = useState({ nombre: "", email: "", telefono: "" });
+  const { cart, getTotalPrice } = useContext(CartContext);
+  const [orderId, setOrderId] = useState(""); //truthy & falsy
+
+  let total = getTotalPrice();
 
   const envioDeFormulario = (event) => {
     event.preventDefault();
-    console.log(user);
+    let order = {
+      buyer: user,
+      items: cart,
+      total: total,
+    };
+
+    let ordersCollection = collection(db, "orders");
+    addDoc(ordersCollection, order).then((res) => setOrderId(res.id));
+    // act prods
+    let productCollection = collection(db, "products");
+
+    cart.forEach((elemento) => {
+      let refDoc = doc(productCollection, elemento.id);
+      updateDoc(refDoc, { stock: elemento.stock - elemento.quantity });
+    });
   };
 
-  //evento onChange ---reminder
   const capturarData = (event) => {
-    //let { name, value } = event.target;
     setUser({ ...user, [event.target.name]: event.target.value });
-  };
-
-  const handleSelect = (e) => {
-    console.log(e.target.value);
-  };
-
-  const handleRadio = (e) => {
-    console.log(e.target.value);
-  };
-
-  const handleCheckbox = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setArrayCheckbox([...arrayCheckbox, value]);
-    } else {
-      let newArr = arrayCheckbox.filter((el) => el !== value);
-      setArrayCheckbox(newArr);
-    }
   };
 
   return (
     <div>
       <h1>Aca va el Form</h1>
-      <form onSubmit={envioDeFormulario}>
-        {/*INPUTS*/}
-        <input
-          type="text"
-          placeholder="Ingresa tu Nombre"
-          onChange={capturarData}
-          name="nombre"
-        />
-        <input
-          type="text"
-          placeholder="Ingresa tu Email"
-          name="email"
-          onChange={capturarData}
-        />
-        <input
-          type="text"
-          placeholder="Ingresa tu Telefono"
-          name="telefono"
-          onChange={capturarData}
-        />
+      {orderId ? (
+        <h2>Gracias por tu compra, tu ticket es: {orderId}</h2>
+      ) : (
+        <form onSubmit={envioDeFormulario}>
+          <input
+            type="text"
+            placeholder="Ingresa tu Nombre"
+            onChange={capturarData}
+            name="nombre"
+          />
+          <input
+            type="text"
+            placeholder="Ingresa tu Email"
+            name="email"
+            onChange={capturarData}
+          />
+          <input
+            type="text"
+            placeholder="Ingresa tu Telefono"
+            name="telefono"
+            onChange={capturarData}
+          />
 
-        <label>test1</label>
-        <input
-          type="radio"
-          name="entidad"
-          value="casatestpelota"
-          onChange={handleRadio}
-        />
-        {/*RADIO B*/}
-        <label>test2</label>
-        <input
-          type="radio"
-          name="entidad"
-          value="casatestpelota"
-          onChange={handleRadio}
-        />
-        {/*SELECT*/}
-        <select onChange={handleSelect}>
-          <option label="uno" value={"one"} />
-          <option label="two" value={"two"} />
-          {/*<option label="two" value={3} />*/}
-        </select>
-        {/* CHECKBOX */}
-        {/* RADIO Buttons  */}
-        <label>rojo</label>
-        <input type="checkbox" value={"rojo"} onChange={handleCheckbox} />
-        <label>azul</label>
-        <input type="checkbox" value={"azul"} onChange={handleCheckbox} />
-        <label>verde</label>
-        <input type="checkbox" value={"verde"} onChange={handleCheckbox} />
-        <label>amarillo</label>
-        <input type="checkbox" value={"amarillo"} onChange={handleCheckbox} />
-
-        <button>Enviar</button>
-        <button type="button">Cancelar</button>
-      </form>
+          <button>comprar</button>
+        </form>
+      )}
+      )
     </div>
   );
 };
