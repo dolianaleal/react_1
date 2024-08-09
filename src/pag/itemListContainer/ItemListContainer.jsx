@@ -2,6 +2,7 @@ import ItemList from "./ItemList";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { PacmanLoader } from "react-spinners";
+import { products } from "../../products.js";
 import { db } from "../../firebaseConfig";
 import {
   collection,
@@ -39,16 +40,16 @@ const ItemListContainer = () => {
     return <PacmanLoader />; //revisar siempre que props recibe una lib -------revisar skeleton
   }
 
-  //const addProducts = () => {
-  // let productsCollection = collection(db, "products");
-  //  products.forEach((elemento) => {
-  //addDoc(productsCollection, elemento);
-  // });
+  // const addProducts = () => {
+  //   let productsCollection = collection(db, "products");
+  //   products.forEach((elemento) => {
+  //     addDoc(productsCollection, elemento);
+  //   });
   // };
 
   return (
     <div>
-      {/*  <Button onClick={addProducts}>Agregar productos</Button>*/}
+      {/* <Button onClick={addProducts}>Agregar productos</Button> */}
       <ItemList items={items} />;
     </div>
   );

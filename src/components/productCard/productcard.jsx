@@ -39,13 +39,10 @@ export const ProductCard = ({ title, description, price, id, img }) => {
       </CardContent>
       <CardActions>
         <Link to={`/itemDetail/${id}`}>
-          <Button size="small" variant="outlined" onClick={eliminar}>
+          <Button size="small" variant="outlined">
             Ver mas
           </Button>
         </Link>
-        <Button size="small" variant="outlined">
-          Ver mas
-        </Button>
       </CardActions>
     </Card>
   );
