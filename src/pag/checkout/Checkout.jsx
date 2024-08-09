@@ -47,7 +47,7 @@ const Checkout = () => {
 
   return (
     <div>
-      <h1>Aca va el Form</h1>
+      <h1>Formulario de Compra</h1>
       {orderId ? (
         <h2>Gracias por tu compra, tu ticket es: {orderId}</h2>
       ) : (
