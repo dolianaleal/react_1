@@ -28,42 +28,39 @@ const Cart = () => {
 
   return (
     <div>
-      {cart.map((elemento) => {
-        return (
-          <div
-            key={elemento.id}
-            style={{ border: "2px solid black", width: "200px" }}
-          >
-            <h2>{elemento.title}</h2>
-            <h2>{elemento.quantity}</h2>
-            <h2>{elemento.price}</h2>
-            <Button
-              variant="contained"
-              onClick={() => handleDelete(elemento.id)}
-            >
-              Eliminar
-            </Button>
-          </div>
-        );
-      })}
+      {cart.map((elemento) => (
+        <div
+          key={elemento.id}
+          style={{ border: "2px solid black", width: "200px" }}
+        >
+          <h2>{elemento.title}</h2>
+          <h2>{elemento.quantity}</h2>
+          <h2>{elemento.price}</h2>
+          <Button variant="contained" onClick={() => handleDelete(elemento.id)}>
+            Eliminar
+          </Button>
+        </div>
+      ))}
 
       <h2 className={cart.length > 0 ? "title" : "ocultar"}>
         El total a pagar es {total}
       </h2>
-      {cart.length > 0 && (
-        <Button onClick={clearCart}> Limpiar Carrito </Button>
-      )}
 
-      <Link to="/checkout">
-        <Button
-          variant="contained"
-          style={{
-            backgroundColor: cart.length > 0 ? "blue" : "red",
-          }}
-        >
-          Finalizar compra
-        </Button>
-      </Link>
+      {cart.length > 0 && (
+        <>
+          <Button onClick={clearCart}> Limpiar Carrito </Button>
+          <Link to="/checkout">
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: "blue",
+              }}
+            >
+              Finalizar compra
+            </Button>
+          </Link>
+        </>
+      )}
     </div>
   );
 };

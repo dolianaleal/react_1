@@ -74,7 +74,6 @@ const Checkout = () => {
           <button>comprar</button>
         </form>
       )}
-      )
     </div>
   );
 };
